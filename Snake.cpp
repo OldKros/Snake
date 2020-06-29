@@ -415,7 +415,7 @@ int main()
             p.X = int(width / 2 - 12); // width must be more than the size of the string literal below
             p.Y = int(height / 1.5f);
             SetConsoleCursorPosition(hOut, p);
-            std::cout << "Press space to start . .";
+            std::cout << "Press space to start...";
             if (GetAsyncKeyState(VK_SPACE))
             {
                 SetConsoleCursorPosition(hOut, p);
