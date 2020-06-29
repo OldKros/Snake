@@ -15,10 +15,6 @@ HANDLE hOut;
     Abstraction,
     Track score and print,
     Comments and code cleanup
-
-
-    WHY DO WE START WITH 2 NODES?????
-    We arent starting with 2 nodes for some reason the head is being drawn twice
 */
 
 enum class eDirection
