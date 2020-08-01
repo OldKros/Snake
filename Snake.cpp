@@ -28,7 +28,7 @@ enum class eDirection
 struct SnakeNode
 {
     int x, y;
-    int ox, oy = ox =0;
+    int ox, oy = ox = 0;
     eDirection direction;
     eDirection odirection;
 
@@ -109,7 +109,7 @@ struct Food
     }
 
     // Takes a reference to the snake_body vector so we know where not to spawn
-    void Respawn(const std::vector<SnakeNode>& _snake_body)
+    void Respawn(const std::vector<SnakeNode> &_snake_body)
     {
         srand((UINT)time(NULL)); // cast to UINT to make the compiler happy
         bool flag = true;
@@ -148,7 +148,7 @@ struct Snake
     Snake()
     {
         // Create the head of the snake
-        AddBodyNode(SnakeNode(width/2, height/2, eDirection::RIGHT));
+        AddBodyNode(SnakeNode(width / 2, height / 2, eDirection::RIGHT));
     }
 
     ~Snake()
@@ -185,28 +185,28 @@ struct Snake
         snake_body.push_back(sn);
     }
 
-    void EatFood(Food& _food)
+    void EatFood(Food &_food)
     {
         switch (snake_body.back().direction)
         {
-            case eDirection::RIGHT:
-                AddBodyNode(SnakeNode(snake_body.back().x - 1, snake_body.back().y, eDirection::RIGHT));
-                break;
+        case eDirection::RIGHT:
+            AddBodyNode(SnakeNode(snake_body.back().x - 1, snake_body.back().y, eDirection::RIGHT));
+            break;
 
-            case eDirection::LEFT:
-                AddBodyNode(SnakeNode(snake_body.back().x + 1, snake_body.back().y, eDirection::LEFT));
-                break;
+        case eDirection::LEFT:
+            AddBodyNode(SnakeNode(snake_body.back().x + 1, snake_body.back().y, eDirection::LEFT));
+            break;
 
-            case eDirection::UP:
-                AddBodyNode(SnakeNode(snake_body.back().x, snake_body.back().y -1, eDirection::UP));
-                break;
+        case eDirection::UP:
+            AddBodyNode(SnakeNode(snake_body.back().x, snake_body.back().y - 1, eDirection::UP));
+            break;
 
-            case eDirection::DOWN:
-                AddBodyNode(SnakeNode(snake_body.back().x, snake_body.back().y +1, eDirection::DOWN));
-                break;
+        case eDirection::DOWN:
+            AddBodyNode(SnakeNode(snake_body.back().x, snake_body.back().y + 1, eDirection::DOWN));
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
         // Send a reference to our body back so the food doesnt spawn inside us
         _food.Respawn(snake_body);
@@ -219,24 +219,24 @@ struct Snake
     {
         switch (snake_body[0].direction)
         {
-            case eDirection::RIGHT:
-                snake_body[0].MoveNode(snake_body[0].x + 1, snake_body[0].y, eDirection::RIGHT);
-                break;
+        case eDirection::RIGHT:
+            snake_body[0].MoveNode(snake_body[0].x + 1, snake_body[0].y, eDirection::RIGHT);
+            break;
 
-            case eDirection::LEFT:
-                snake_body[0].MoveNode(snake_body[0].x - 1, snake_body[0].y, eDirection::LEFT);
-                break;
+        case eDirection::LEFT:
+            snake_body[0].MoveNode(snake_body[0].x - 1, snake_body[0].y, eDirection::LEFT);
+            break;
 
-            case eDirection::UP:
-                snake_body[0].MoveNode(snake_body[0].x, snake_body[0].y + 1, eDirection::UP);
-                break;
+        case eDirection::UP:
+            snake_body[0].MoveNode(snake_body[0].x, snake_body[0].y + 1, eDirection::UP);
+            break;
 
-            case eDirection::DOWN:
-                snake_body[0].MoveNode(snake_body[0].x, snake_body[0].y - 1, eDirection::DOWN);
-                break;
+        case eDirection::DOWN:
+            snake_body[0].MoveNode(snake_body[0].x, snake_body[0].y - 1, eDirection::DOWN);
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
     }
 
@@ -246,7 +246,7 @@ struct Snake
     }
 
     void MoveBody()
-    {   // Avoiding compiler warnings size_t compare to int
+    { // Avoiding compiler warnings size_t compare to int
         for (int i = 1, len = snake_body.size(); i < len; ++i)
         {
             snake_body[i].MoveNode(snake_body[i - 1].ox,
@@ -273,7 +273,7 @@ struct Snake
     }
 
     bool CheckSelfCollision()
-    {   // Avoiding compiler warnings size_t compare to int
+    { // Avoiding compiler warnings size_t compare to int
         for (int i = 1, len = snake_body.size(); i < len; ++i)
         {
             if (snake_body[0].x == snake_body[i].x && snake_body[0].y == snake_body[i].y)
@@ -286,14 +286,14 @@ struct Snake
     }
 };
 
-Snake* ResetSnake(Snake* snake)
+Snake *ResetSnake(Snake *snake)
 {
     delete snake;
     snake = new Snake();
     return snake;
 }
 
-Food* ResetFood(Food* food)
+Food *ResetFood(Food *food)
 {
     food->Undraw();
     delete food;
@@ -309,7 +309,6 @@ void HideCursor()
     SetConsoleCursorInfo(hOut, &ConCurInf);
 }
 
-
 int main()
 {
     // Width cannot be less than 25
@@ -318,15 +317,15 @@ int main()
 
     // Set Output handle
     hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    SMALL_RECT DisplayArea = { 0, 0, width, height };
+    SMALL_RECT DisplayArea = {0, 0, width, height};
     SetConsoleWindowInfo(hOut, TRUE, &DisplayArea);
 
     // Hide Cursor
     HideCursor();
 
     bool started = false;
-    Snake* snake = new Snake();
-    Food* food = new Food();
+    Snake *snake = new Snake();
+    Food *food = new Food();
 
     while (true)
     {
@@ -406,11 +405,12 @@ int main()
         }
         else
         {
-            // Wait for user to press the space bar
             COORD p;
             p.X = int(width / 2 - 12); // width must be more than the size of the string literal below
             p.Y = int(height / 1.5f);
             SetConsoleCursorPosition(hOut, p);
+
+            // Wait for user to press the space bar
             std::cout << "Press space to start...";
             if (GetAsyncKeyState(VK_SPACE))
             {
