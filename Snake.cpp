@@ -5,16 +5,16 @@
 #include <vector>
 #include <time.h>
 
-// Globals
+// Global's
 short width = 30;
 short height = 30;
 const int updateTime = 150; // updates in ms
 HANDLE hOut;
 
-/* TODO: 
+/* TODO:
     Abstraction,
     Track score and print,
-    Comments and code cleanup
+    Comments and code clean-up
 */
 
 enum class eDirection
@@ -32,7 +32,7 @@ struct SnakeNode
     eDirection direction;
     eDirection odirection;
 
-    SnakeNode() 
+    SnakeNode()
     {
         x = 0;
         y = 0;
@@ -113,7 +113,7 @@ struct Food
     {
         srand((UINT)time(NULL)); // cast to UINT to make the compiler happy
         bool flag = true;
-        
+
         int tempX = rand() % width;
         int tempY = rand() % height;
 
@@ -148,7 +148,7 @@ struct Snake
     Snake()
     {
         // Create the head of the snake
-        AddBodyNode(SnakeNode(width/2, height/2, eDirection::RIGHT)); 
+        AddBodyNode(SnakeNode(width/2, height/2, eDirection::RIGHT));
     }
 
     ~Snake()
@@ -179,7 +179,7 @@ struct Snake
     {
         snake_body.back().Undraw();
     }
-    
+
     void AddBodyNode(SnakeNode sn)
     {
         snake_body.push_back(sn);
@@ -196,7 +196,7 @@ struct Snake
             case eDirection::LEFT:
                 AddBodyNode(SnakeNode(snake_body.back().x + 1, snake_body.back().y, eDirection::LEFT));
                 break;
-            
+
             case eDirection::UP:
                 AddBodyNode(SnakeNode(snake_body.back().x, snake_body.back().y -1, eDirection::UP));
                 break;
@@ -313,14 +313,14 @@ void HideCursor()
 int main()
 {
     // Width cannot be less than 25
-    if (width < 25) 
+    if (width < 25)
         width = 25;
 
     // Set Output handle
     hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     SMALL_RECT DisplayArea = { 0, 0, width, height };
     SetConsoleWindowInfo(hOut, TRUE, &DisplayArea);
-    
+
     // Hide Cursor
     HideCursor();
 
@@ -347,7 +347,7 @@ int main()
             }
             else if (GetAsyncKeyState(VK_UP) && snake->snake_body[0].direction != eDirection::UP)
             {
-                snake->snake_body[0].ChangeDirection(eDirection::DOWN); 
+                snake->snake_body[0].ChangeDirection(eDirection::DOWN);
             }
             else if (GetAsyncKeyState(VK_DOWN) && snake->snake_body[0].direction != eDirection::DOWN)
             {
@@ -400,7 +400,7 @@ int main()
             // quit the loop and delete snake and food
             if (GetAsyncKeyState(VK_ESCAPE))
             {
-                
+
                 break;
             }
         }
@@ -421,7 +421,7 @@ int main()
                 food->Respawn(snake->snake_body);
             }
         }
-        
+
         Sleep(updateTime);
     }
     delete snake;
