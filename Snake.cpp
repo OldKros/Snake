@@ -6,15 +6,15 @@
 #include <time.h>
 
 // Global's
-short width = 30;
-short height = 30;
+const short width = 30;
+const short height = 30;
 const int updateTime = 150; // updates in ms
 HANDLE hOut;
 
 /* TODO:
-    Abstraction,
-    Track score and print,
-    Comments and code clean-up
+    Abstraction / Move from structs to classes?,
+    Track score and print to screen / at the end,
+    Refactor?
 */
 
 enum class eDirection
@@ -122,7 +122,8 @@ struct Food
         {
             for (auto a : _snake_body)
             {
-                // we need to rerandomise and check again if the spawn location is occupied
+                // if we are trying to spawn ontop of the snake
+                // we need to rerandomise and check again
                 if (tempX == a.x && tempY == a.y)
                 {
                     tempX = rand() % width;
@@ -130,8 +131,6 @@ struct Food
                     continue;
                 }
             }
-
-            // We checked all the nodes and are not ontop of any
             Undraw();
             x = tempX;
             y = tempY;
@@ -146,8 +145,7 @@ struct Snake
     std::vector<SnakeNode> snake_body;
 
     Snake()
-    {
-        // Create the head of the snake
+    { // Create the head of the snake
         AddBodyNode(SnakeNode(width / 2, height / 2, eDirection::RIGHT));
     }
 
@@ -168,13 +166,13 @@ struct Snake
             a.Undraw();
     }
 
-    // If we are moving still we only need to redraw the head
+    // If we are moving we only need to redraw the head
     void MoveDrawSnake()
     {
         snake_body.front().Draw();
     }
 
-    // If we are moving still we only need to undraw the back of the snake.
+    // If we are moving we only need to undraw the back of the snake.
     void MoveUndrawSnake()
     {
         snake_body.back().Undraw();
@@ -246,7 +244,7 @@ struct Snake
     }
 
     void MoveBody()
-    { // Avoiding compiler warnings size_t compare to int
+    {
         for (int i = 1, len = snake_body.size(); i < len; ++i)
         {
             snake_body[i].MoveNode(snake_body[i - 1].ox,
@@ -273,7 +271,7 @@ struct Snake
     }
 
     bool CheckSelfCollision()
-    { // Avoiding compiler warnings size_t compare to int
+    {
         for (int i = 1, len = snake_body.size(); i < len; ++i)
         {
             if (snake_body[0].x == snake_body[i].x && snake_body[0].y == snake_body[i].y)
@@ -281,7 +279,6 @@ struct Snake
                 return true; // we hit ourselves
             }
         }
-        // everythings fine :)
         return false;
     }
 };
@@ -311,17 +308,10 @@ void HideCursor()
 
 int main()
 {
-    // Width cannot be less than 25
-    if (width < 25)
-        width = 25;
-
     // Set Output handle
     hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     SMALL_RECT DisplayArea = {0, 0, width, height};
     SetConsoleWindowInfo(hOut, TRUE, &DisplayArea);
-
-    // Hide Cursor
-    HideCursor();
 
     bool started = false;
     Snake *snake = new Snake();
@@ -329,7 +319,7 @@ int main()
 
     while (true)
     {
-        //Rehide the cursor cus its annoying if you click in the console
+        //Rehide the cursor incase you've clicked in the console
         HideCursor();
 
         if (started)
@@ -395,18 +385,17 @@ int main()
                 started = false;
             }
 
-            // Esc closes the program
             // quit the loop and delete snake and food
             if (GetAsyncKeyState(VK_ESCAPE))
             {
-
                 break;
             }
         }
         else
         {
             COORD p;
-            p.X = int(width / 2 - 12); // width must be more than the size of the string literal below
+            // width must be bigger than than below
+            p.X = int(width / 2 - 12);
             p.Y = int(height / 1.5f);
             SetConsoleCursorPosition(hOut, p);
 
@@ -421,7 +410,6 @@ int main()
                 food->Respawn(snake->snake_body);
             }
         }
-
         Sleep(updateTime);
     }
     delete snake;
