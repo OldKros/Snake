@@ -15,30 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Food.cpp">
+    <ClCompile Include="src\Food.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SnakeNode.cpp">
+    <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="src\Snake.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Snake.cpp">
+    <ClCompile Include="src\SnakeNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Food.h">
+    <ClInclude Include="src\Food.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SnakeNode.h">
+    <ClInclude Include="src\Globals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Snake.h">
+    <ClInclude Include="src\Snake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Globals.h">
+    <ClInclude Include="src\SnakeNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
