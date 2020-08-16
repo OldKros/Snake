@@ -6,7 +6,6 @@
 
 class Food;
 
-
 class Snake
 {
 public:
@@ -19,8 +18,8 @@ public:
     void UndrawSnake();
     void MoveDrawSnake();
     void MoveUndrawSnake();
-    void AddBodyNode(const SnakeNode& sn);
-    void EatFood(Food& food);
+    void AddBodyNode(const SnakeNode &sn);
+    void EatFood(Food &food);
     void MoveHead();
     void MoveHead(int x, int y, eDirection direction);
     void MoveBody();

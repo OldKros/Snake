@@ -6,7 +6,7 @@
 #include <Windows.h>
 #include <time.h>
 
-/* 
+/*
 *   TODO:
 *       ?
 */
@@ -16,13 +16,13 @@ const short conHeight = 30;
 const int updateTime = 100; // in ms
 HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
-Snake* ResetSnake(Snake* snake)
+Snake *ResetSnake(Snake *snake)
 {
     delete snake;
     return new Snake();
 }
 
-Food* ResetFood(Food* food)
+Food *ResetFood(Food *food)
 {
     delete food;
     return new Food();
@@ -44,12 +44,12 @@ int main()
 
     int score = 0;
     bool started = false;
-    Snake* snake = new Snake();
-    Food* food = new Food();
+    Snake *snake = new Snake();
+    Food *food = new Food();
 
     while (true)
     {
-       if (started)
+        if (started)
         {
             // Check if any directional key is pressed and we are not already goin the opposite way
             // KeyUp is down, KeyDown is up for some reason
@@ -101,9 +101,8 @@ int main()
                 continue;
             }
 
-            //food->Draw();
             snake->Move();
-            
+
             // Check if we are eating ourselves
             if (snake->CheckSelfCollision())
             {
@@ -127,9 +126,9 @@ int main()
             p.Y = int(conHeight / 2);
             SetConsoleCursorPosition(hOut, p);
 
-            // Wait for user to press the space bar
+            // Wait for user to press enter
             if (score > 0)
-                std::cout << "       Your Score: " << score << std::endl;
+                std::cout << "       Your Score: " << score;
             else
                 std::cout << "Press enter to start...";
             if (std::cin.get())

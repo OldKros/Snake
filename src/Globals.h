@@ -8,5 +8,8 @@ extern HANDLE hOut;
 
 enum class eDirection
 {
-    UP, DOWN, LEFT, RIGHT
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
 };

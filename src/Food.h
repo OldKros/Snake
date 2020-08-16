@@ -14,6 +14,5 @@ public:
     void Draw();
     void Undraw();
     void Spawn();
-    void Respawn(const std::vector<SnakeNode>& snake_body);
+    void Respawn(const std::vector<SnakeNode> &snake_body);
 };
-

@@ -16,4 +16,3 @@ public:
     void Undraw();
     void MoveNode(int x, int y, eDirection direction);
 };
-

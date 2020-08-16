@@ -4,7 +4,7 @@
 #include <vector>
 
 Snake::Snake()
-    :playerScore(0)
+    : playerScore(0)
 { // Create the head of the snake
     AddBodyNode(SnakeNode(conWidth / 2, conHeight / 2, eDirection::RIGHT));
 }
@@ -16,13 +16,13 @@ Snake::~Snake()
 
 void Snake::DrawSnake()
 {
-    for (auto a : snake_body)
+    for (auto &a : snake_body)
         a.Draw();
 }
 
 void Snake::UndrawSnake()
 {
-    for (auto a : snake_body)
+    for (auto &a : snake_body)
         a.Undraw();
 }
 
@@ -38,12 +38,12 @@ void Snake::MoveUndrawSnake()
     snake_body.back().Undraw();
 }
 
-void Snake::AddBodyNode(const SnakeNode& sn)
+void Snake::AddBodyNode(const SnakeNode &sn)
 {
-    snake_body.push_back(sn);
+    snake_body.emplace_back(sn);
 }
 
-void Snake::EatFood(Food& food)
+void Snake::EatFood(Food &food)
 {
     switch (snake_body.back().direction)
     {
@@ -109,8 +109,8 @@ void Snake::MoveBody()
     for (size_t i = 1, len = snake_body.size(); i < len; ++i)
     {
         snake_body[i].MoveNode(snake_body[i - 1].ox,
-            snake_body[i - 1].oy,
-            snake_body[i - 1].odirection);
+                               snake_body[i - 1].oy,
+                               snake_body[i - 1].odirection);
     }
 }
 
