@@ -42,32 +42,32 @@ void Food::Spawn()
 }
 
 // Takes a reference to the snake_body vector so we know where not to spawn
-void Food::Respawn(const std::vector<SnakeNode>& snake_body)
+void Food::Respawn(const std::vector<SnakeNode> &snake_body)
 {
     srand((UINT)time(NULL)); // cast to UINT to make the compiler happy
-    bool flag = true;
-
-    int tempX = rand() % conWidth;
-    int tempY = rand() % conHeight;
+    bool goodToGo = false;
+    int tempX;
+    int tempY;
 
     // Loop through the snakes body to check we are not trying to spawn the food on top of the snake
-    while (flag)
+    while (!goodToGo)
     {
-        for (const auto& a : snake_body)
+        tempX = rand() % conWidth;
+        tempY = rand() % conHeight;
+        goodToGo = true;
+        for (const auto &a : snake_body)
         {
             // if we are trying to spawn ontop of the snake
-            // we need to rerandomise and check again
+            // we need to restart and check again
             if (tempX == a.x && tempY == a.y)
             {
-                tempX = rand() % conWidth;
-                tempY = rand() % conHeight;
-                continue;
+                goodToGo = false;
+                break;
             }
         }
-        Undraw();
-        x = tempX;
-        y = tempY;
-        Draw();
-        flag = false;
     }
+    Undraw();
+    x = tempX;
+    y = tempY;
+    Draw();
 }
