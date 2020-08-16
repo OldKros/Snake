@@ -1,4 +1,5 @@
 #include "Food.h"
+#include "SnakeNode.h"
 
 #include <Windows.h>
 #include <iostream>
@@ -7,6 +8,11 @@
 Food::Food()
     : x(0), y(0)
 {
+}
+
+Food::~Food()
+{
+    Undraw();
 }
 
 void Food::Draw()
@@ -36,7 +42,7 @@ void Food::Spawn()
 }
 
 // Takes a reference to the snake_body vector so we know where not to spawn
-void Food::Respawn(const std::vector<SnakeNode>& _snake_body)
+void Food::Respawn(const std::vector<SnakeNode>& snake_body)
 {
     srand((UINT)time(NULL)); // cast to UINT to make the compiler happy
     bool flag = true;
@@ -47,7 +53,7 @@ void Food::Respawn(const std::vector<SnakeNode>& _snake_body)
     // Loop through the snakes body to check we are not trying to spawn the food on top of the snake
     while (flag)
     {
-        for (const auto& a : _snake_body)
+        for (const auto& a : snake_body)
         {
             // if we are trying to spawn ontop of the snake
             // we need to rerandomise and check again

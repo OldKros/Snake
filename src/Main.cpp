@@ -13,22 +13,19 @@
 
 const short conWidth = 30;
 const short conHeight = 30;
-const int updateTime = 150; // in ms
+const int updateTime = 100; // in ms
 HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
 Snake* ResetSnake(Snake* snake)
 {
     delete snake;
-    snake = new Snake();
-    return snake;
+    return new Snake();
 }
 
 Food* ResetFood(Food* food)
 {
-    food->Undraw();
     delete food;
-    food = new Food();
-    return food;
+    return new Food();
 }
 
 void HideCursor()
@@ -125,14 +122,14 @@ int main()
         else
         {
             COORD p;
-            // width must be bigger than than below
+            // width must be bigger than "Press enter to start..."
             p.X = int(conWidth / 2 - 12);
             p.Y = int(conHeight / 2);
             SetConsoleCursorPosition(hOut, p);
 
             // Wait for user to press the space bar
             if (score > 0)
-                std::cout << "Your Score: " << score << std::endl;
+                std::cout << "       Your Score: " << score << std::endl;
             else
                 std::cout << "Press enter to start...";
             if (std::cin.get())

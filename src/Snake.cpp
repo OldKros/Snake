@@ -1,4 +1,5 @@
 #include "Snake.h"
+#include "Food.h"
 
 #include <vector>
 
@@ -37,12 +38,12 @@ void Snake::MoveUndrawSnake()
     snake_body.back().Undraw();
 }
 
-void Snake::AddBodyNode(SnakeNode sn)
+void Snake::AddBodyNode(const SnakeNode& sn)
 {
     snake_body.push_back(sn);
 }
 
-void Snake::EatFood(Food& _food)
+void Snake::EatFood(Food& food)
 {
     switch (snake_body.back().direction)
     {
@@ -66,7 +67,7 @@ void Snake::EatFood(Food& _food)
         break;
     }
     // Send a reference to our body back so the food doesnt spawn inside us
-    _food.Respawn(snake_body);
+    food.Respawn(snake_body);
     // This is undrawing the point where the head is now leaving a gap in the snake so we need to
     // redraw the snake
     DrawSnake();
@@ -98,9 +99,9 @@ void Snake::MoveHead()
     }
 }
 
-void Snake::MoveHead(int _x, int _y, eDirection _direction)
+void Snake::MoveHead(int x, int y, eDirection direction)
 {
-    snake_body[0].MoveNode(_x, _y, _direction);
+    snake_body[0].MoveNode(x, y, direction);
 }
 
 void Snake::MoveBody()
@@ -122,9 +123,9 @@ void Snake::Move()
 }
 
 // When we want to move the head of the snake to a specific point.
-void Snake::Move(int _x, int _y, eDirection _direction)
+void Snake::Move(int x, int y, eDirection direction)
 {
-    MoveHead(_x, _y, _direction);
+    MoveHead(x, y, direction);
     MoveBody();
     MoveUndrawSnake();
     MoveDrawSnake();

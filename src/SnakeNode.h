@@ -5,15 +5,15 @@ class SnakeNode
 {
 public:
     int x, y;
-    int ox, oy = ox = 0;
+    int ox, oy;
     eDirection direction;
     eDirection odirection;
 
     SnakeNode();
-    SnakeNode(int _x, int _y, eDirection _direction);
-    void ChangeDirection(eDirection _direction);
+    SnakeNode(int x, int y, eDirection direction);
+    void ChangeDirection(eDirection direction);
     void Draw();
     void Undraw();
-    void MoveNode(int _x, int _y, eDirection _direction);
+    void MoveNode(int x, int y, eDirection direction);
 };
 

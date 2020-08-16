@@ -1,7 +1,8 @@
 #pragma once
-#include "SnakeNode.h"
 
 #include <vector>
+
+class SnakeNode;
 
 class Food
 {
@@ -9,9 +10,10 @@ public:
     int x, y;
 
     Food();
+    ~Food();
     void Draw();
     void Undraw();
     void Spawn();
-    void Respawn(const std::vector<SnakeNode>& _snake_body);
+    void Respawn(const std::vector<SnakeNode>& snake_body);
 };
 

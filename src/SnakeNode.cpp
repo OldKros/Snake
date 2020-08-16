@@ -3,18 +3,18 @@
 #include <iostream>
 
 SnakeNode::SnakeNode()
-    : x(0), y(0), direction(eDirection::RIGHT), odirection(direction)
+    : x(0), y(0), ox(0), oy(0), direction(eDirection::RIGHT), odirection(direction)
 {
 }
 
-SnakeNode::SnakeNode(int _x, int _y, eDirection _direction)
-    : x(_x), y(_y), direction(_direction), odirection(_direction)
+SnakeNode::SnakeNode(int x, int y, eDirection direction)
+    : x(x), y(y), ox(0), oy(0), direction(direction), odirection(direction)
 {
 }
 
-void SnakeNode::ChangeDirection(eDirection _direction)
+void SnakeNode::ChangeDirection(eDirection direction)
 {
-    direction = _direction;
+    this->direction = direction;
 }
 
 void SnakeNode::Draw()
@@ -35,13 +35,13 @@ void SnakeNode::Undraw()
     std::cout << ' ';
 }
 
-void SnakeNode::MoveNode(int _x, int _y, eDirection _direction)
+void SnakeNode::MoveNode(int x, int y, eDirection direction)
 {
-    ox = x;
-    oy = y;
-    odirection = direction;
+    ox = this->x;
+    oy = this->y;
+    odirection = this->direction;
 
-    x = _x;
-    y = _y;
-    direction = _direction;
+    this->x = x;
+    this->y = y;
+    this->direction = direction;
 }

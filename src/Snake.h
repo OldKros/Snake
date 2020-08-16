@@ -1,6 +1,11 @@
 #pragma once
+#include "Globals.h"
 #include "SnakeNode.h"
-#include "Food.h"
+
+#include <vector>
+
+class Food;
+
 
 class Snake
 {
@@ -14,12 +19,12 @@ public:
     void UndrawSnake();
     void MoveDrawSnake();
     void MoveUndrawSnake();
-    void AddBodyNode(SnakeNode sn);
-    void EatFood(Food& _food);
+    void AddBodyNode(const SnakeNode& sn);
+    void EatFood(Food& food);
     void MoveHead();
-    void MoveHead(int _x, int _y, eDirection _direction);
+    void MoveHead(int x, int y, eDirection direction);
     void MoveBody();
     void Move();
-    void Move(int _x, int _y, eDirection _direction);
+    void Move(int x, int y, eDirection direction);
     bool CheckSelfCollision();
 };
